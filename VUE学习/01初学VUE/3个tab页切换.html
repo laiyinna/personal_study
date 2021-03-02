@@ -1,0 +1,53 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-03-02 22:38:43
+ * @LastEditTime: 2021-03-02 22:53:13
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \undefinede:\GitHUb\personal_study\VUE学习\01初学VUE\3个tab页切换.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>3个tab页切换</title>
+</head>
+<body>
+    <!-- <div id = "app">
+        <h3 v-if = "tab == 1">首页</h3>
+        <h3 v-else-if = "tab == 2">新闻</h3>
+        <h3 v-else>个人中心</h3>
+        <button @click = "tabChange" data-id = "1">首页</button>
+        <button @click = "tabChange" data-id = "2">新闻</button>
+        <button @click = "tabChange" data-id = "3">个人中心</button>
+    </div> -->
+    <div id = "app">
+        <h3 v-show = "tab == 1">首页</h3>
+        <h3 v-show = "tab == 2">新闻</h3>
+        <h3 v-show = "tab !=1 && tab != 2">个人中心</h3>
+        <button @click = "tabChange" data-id = "1">首页</button>
+        <button @click = "tabChange" data-id = "2">新闻</button>
+        <button @click = "tabChange" data-id = "3">个人中心</button>
+    </div>
+    <script type="text/javascript">
+        var firstVue = new Vue({
+            // 元素id、类名
+            el : "#app",
+            data : {
+                tab : 1
+            },
+            methods : {
+                tabChange : function(e) {
+                    console.log(e.target.dataset.id);
+                    let tabid = e.target.dataset.id;
+                    firstVue.tab = tabid;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

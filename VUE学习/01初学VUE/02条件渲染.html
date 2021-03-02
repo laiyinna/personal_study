@@ -1,0 +1,93 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-03-02 21:08:20
+ * @LastEditTime: 2021-03-02 22:30:23
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \undefinede:\GitHUb\personal_study\VUE学习\01初学VUE\01firstVue.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>条件渲染</title>
+    <style>
+        #pane {
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>v-if条件渲染</h1>
+    <hr>
+    <div id = "app">
+        <!-- {{}}里是一个变量名，也可以是一个方法名 -->
+        <h1 v-if = "seen">website : {{website}}</h1>
+        <h1 v-if = "ok">URL : {{URL}}</h1>
+        <h1 v-else>请先登录</h1>
+        <h1 v-if = "can">{{details()}}</h1>
+        <h1>用户允许登录时间</h1>
+        <h3 v-if = "age > 18">允许24小时登录</h3>
+        <h3 v-else-if = "age > 14">允许8小时登录</h3>
+        <h3 v-else>允许4小时登录</h3>
+    </div>
+    <hr size="5px" color="black">
+    <h1>v-show条件渲染</h1>
+    <hr>
+    <div id = "vshow">
+        <div v-show = "isShow" id = "pane">
+            <h1>HelloVue</h1>
+        </div>
+        <button @click = "showPane">切换显示内容</button>
+    </div>
+    <script type="text/javascript">
+        var firstVue = new Vue({
+            // 元素id、类名
+            el : "#app",
+            data : {
+                website : "菜鸟教程",
+                URL : "https://www.runoob.com/vue2/vue-start.html",
+                alexa : "10000",
+                seen : true,
+                ok : false,
+                can : true,
+                age : 24
+            },
+            methods : {
+                details : function() {
+                    if(this.seen) {
+                        return this.website + "-学的不仅是技术，更是梦想！";
+                    }else {
+                        return this.website + "-学的不仅是技术，更是梦想！！！！！";
+                    }
+                }
+            }
+        });
+        var secondVue = new Vue({
+            // 元素id、类名
+            el : "#vshow",
+            data : {
+                isShow : true
+            },
+            methods : {
+                showPane : function() {
+                    // if(this.isShow) {
+                    //     this.isShow = false;
+                    // }else{
+                    //     this.isShow = true;
+                    // }
+                    this.isShow = !this.isShow;
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>

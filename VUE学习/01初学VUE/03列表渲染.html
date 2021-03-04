@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-02 22:56:04
- * @LastEditTime: 2021-03-02 23:22:35
+ * @LastEditTime: 2021-03-04 20:18:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\GitHUb\personal_study\VUE学习\01初学VUE\列表渲染.html
@@ -25,27 +25,22 @@
     </style>
 </head>
 <body>
-    <!-- <div id = "app">
-        <ul>
-            <li v-for = "name in stars">
-                {{name}}
-            </li>
-        </ul>
-    </div> -->
-    <hr size="5px" color="black">
     <h1>武林外传列表</h1>
-    <hr size="5px" color="black">
     <div id = "app">
         <table border="1" style="border:1px solid #000;width:500px;height:400px;">
             <thead>
                 <tr>
+                    <th>序号</th>
                     <th>姓名</th>
                     <th>年龄</th>
                     <th>性别</th>
                 </tr>
             </thead>
-            <tbody v-for = "person in biographyOfWulin" align="center">
+            <tbody v-for = "person,key in biographyOfWulin" align="center">
                 <tr>
+                    <td>
+                        <h4>{{key+1}}</h4>
+                    </td>
                     <td>
                         <h4>{{person.name}}</h4>
                     </td>
@@ -58,17 +53,54 @@
                 </tr>
             </tbody>
         </table>
-        <!-- <ul>
-            <li v-for = "person in biographyOfWulin">
-                <h4>{{person.name}}</h4>
-            </li>
-            <li v-for = "person in biographyOfWulin">
-                <h4>{{person.age}}</h4>
-            </li>
-            <li v-for = "person in biographyOfWulin">
-                <h4>{{person.gender}}</h4>
-            </li>
-        </ul> -->
+        <hr size="5px" color="black">
+        <h1>循环对象</h1>
+        <table border="1" style="border:1px solid #000;width:500px;height:400px;">
+            <thead>
+                <tr>
+                    <th>属性</th>
+                    <th>掌柜</th>
+                </tr>
+            </thead>
+            <tbody v-for = "person,key in biographyOfWulin[0]" align="center">
+                <tr>
+                    <td>
+                        <h4>{{key}}</h4>
+                    </td>
+                    <td>
+                        <h4>{{person}}</h4>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr size="5px" color="black">
+        <h1>循环+条件</h1>
+        <table border="1" style="border:1px solid #000;width:500px;height:400px;">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                </tr>
+            </thead>
+            <tbody v-if = "person.age%2 == 0" v-for = "person,key in biographyOfWulin" align="center">
+                <tr>
+                    <td>
+                        <h4>{{key+1}}</h4>
+                    </td>
+                    <td>
+                        <h4>{{person.name}}</h4>
+                    </td>
+                    <td>
+                        <h4>{{person.age}}</h4>
+                    </td>
+                    <td>
+                        <h4>{{person.gender}}</h4>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <script type="text/javascript">
         var firstVue = new Vue({

@@ -1,0 +1,72 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-03-02 22:56:04
+ * @LastEditTime: 2021-03-07 16:26:41
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \undefinede:\GitHUb\personal_study\VUE学习\01初学VUE\列表渲染.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>模板语法</title>
+    <style>
+        #pane {
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            text-align: center;
+        }
+        #login {
+            background : skyblue;
+        }
+        #register {
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <div id = "app">
+        <h1>{{message}}</h1>
+        <!-- 一次性插入不再修改 -->
+        <h1 v-once>{{message}}</h1>
+        <!-- 插入html标签 -->
+        <h1 v-html = "htmlTxt"></h1>
+        <!-- 修改属性内容 -->
+        <div v-bind:id = "idname">
+            <h1>{{isLoginOrRegister}}</h1>
+        </div>
+        <!-- 绑定事件 -->
+        <button @click = "changeColor">改变颜色</button>
+    </div>
+    <script type="text/javascript">
+        var firstVue = new Vue({
+            // 元素id、类名
+            el : "#app",
+            data : {
+                message : "模板语法",
+                htmlTxt : "<span>hello</span>",
+                idname : "login",
+                isLoginOrRegister : "登录"
+            },
+            methods : {
+                changeColor : function() {
+                    if(this.idname == "login") {
+                        this.idname = "register";
+                        this.isLoginOrRegister = "注册";
+                    }else {
+                        this.idname = "login";
+                        this.isLoginOrRegister = "登录";
+                    }
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-03-02 22:56:04
+ * @LastEditTime: 2021-03-07 18:39:32
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \undefinede:\GitHUb\personal_study\VUE学习\01初学VUE\列表渲染.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .page{
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            display: none;
+        }
+        .active{
+            display: block;;
+        }
+    </style>
+    <title>class样式</title>
+</head>
+<body>
+    <div id = "app">
+        <!-- 通过对象的方式觉定是否存在某个类 -->
+        <div class = "page" :class = "{active:isActive}"></div>
+        <!-- 直接放置对象 -->
+        <div class = "page" :class = "styleObj"></div>
+        <!-- 直接放置数组 -->
+        <div class = "page" :class = "styleArr"></div>
+        <!-- 直接放置字符串 -->
+        <div class = "page" :class = "styleStr"></div>
+        <!-- 数组和对象同时使用 -->
+        <div class = "page" :class = "styleArrObj"></div>
+        <button @click = "changeColor">改变样式</button>
+    </div>
+    <script type="text/javascript">
+        var firstVue = new Vue({
+            // 元素id、类名
+            el : "#app",
+            data : {
+                isActive : true,
+                styleObj : {active:true,laochen:true},
+                styleArr : ['col-12-xs','red-bg'],
+                styleStr : "abc def ghi",
+                styleArrObj : ["abc",{active:true}]
+            },
+            methods : {
+                changeColor : function() {
+                    this.isActive = !this.isActive;
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>

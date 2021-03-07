@@ -1,0 +1,53 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-03-02 22:56:04
+ * @LastEditTime: 2021-03-07 18:09:15
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \undefinede:\GitHUb\personal_study\VUE学习\01初学VUE\列表渲染.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>侦听器</title>
+</head>
+<body>
+    <div id = "app">
+        <h1>{{msg}}</h1>
+        <h1>{{resvermsg}}</h1>
+    </div>
+    <script type="text/javascript">
+        var firstVue = new Vue({
+            // 元素id、类名
+            el : "#app",
+            data : {
+                msg : "hello!"
+            },
+            //计算属性
+            computed : {
+                resvermsg :{
+                    get : function() {
+                        return this.msg.split("").reverse().join("");
+                    },
+                    set : function(val) {
+                        return this.msg = val;
+                    }
+                }
+            },
+            //侦听器val为更新的值
+            watch : {
+                msg : function(val) {
+                    console.log("监听事件");
+                    console.log(val);
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>

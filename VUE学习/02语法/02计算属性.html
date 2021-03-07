@@ -1,0 +1,116 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-03-02 22:56:04
+ * @LastEditTime: 2021-03-07 18:02:59
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \undefinede:\GitHUb\personal_study\VUE学习\01初学VUE\列表渲染.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>计算属性</title>
+    <style>
+        #pane {
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            text-align: center;
+        }
+        #login {
+            background : skyblue;
+        }
+        #register {
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <div id = "app">
+        <!-- 一般情况下，计算内容 -->
+        <h1>{{firstName + lastName}}</h1>
+        <!-- 计算属性 -->
+        <h1>{{fullName}}</h1>
+        <!-- 平时逆序显示一个单词 -->
+        <h1>{{word.split("").reverse().join("")}}</h1>
+        <!-- VUE逆序显示一个单词 -->
+        <h1>{{reverseWord}}</h1>
+        <h1>列表计算</h1>
+        <table border="1" style="border:1px solid #000;width:500px;height:400px;">
+            <thead>
+                <tr>
+                    <th style="width:10%">序号</th>
+                    <th style="width:20%">姓名</th>
+                    <th style="width:20%">年龄</th>
+                    <th style="width:20%">性别</th>
+                    <th style="width:30%">头像</th>
+                </tr>
+            </thead>
+            <tbody v-for = "person,key in oddPerson" align="center">
+                <tr>
+                    <td>
+                        <h4>{{key+1}}</h4>
+                    </td>
+                    <td>
+                        <h4>{{person.name}}</h4>
+                    </td>
+                    <td>
+                        <h4>{{person.age}}</h4>
+                    </td>
+                    <td>
+                        <h4>{{person.gender}}</h4>
+                    </td>
+                    <td>
+                        <img :src="person.image"></img>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        var firstVue = new Vue({
+            // 元素id、类名
+            el : "#app",
+            data : {
+                firstName : "苏",
+                lastName : "元元",
+                word : "music",
+                biographyOfWulin : [
+                    {name : '佟湘玉',age : 29, gender : '女', image : 'E:/touxiang/t.jpg'},
+                    {name : '白展堂',age : 29, gender : '男', image : 'E:/touxiang/b.jpg'},
+                    {name : '郭芙蓉',age : 25, gender : '女', image : 'E:/touxiang/g.jpg'},
+                    {name : '吕轻侯',age : 26, gender : '男', image : 'E:/touxiang/l.jpg'},
+                    {name : '李大嘴',age : 27, gender : '男', image : 'E:/touxiang/z.jpg'},
+                    {name : '祝无双',age : 25, gender : '女', image : 'E:/touxiang/s.jpg'},
+                    {name : '莫小贝',age : 12, gender : '女', image : 'E:/touxiang/m.jpg'},
+                    {name : '邢育森',age : 29, gender : '男', image : 'E:/touxiang/x.jpg'},
+                    {name : '燕小六',age : 24, gender : '男', image : 'E:/touxiang/y.jpg'}
+                ]
+            },
+            // 计算属性
+            computed : {
+                fullName : function() {
+                    //会将计算结果缓存
+                    return this.firstName + this.lastName;
+                },
+                reverseWord : function() {
+                    //会将计算结果缓存
+                    return this.word.split("").reverse().join("");
+                },
+                oddPerson : function() {
+                    let result = this.biographyOfWulin.filter((item, i)=>{
+                        return item.age%2 == 0;
+                    })
+                    return result;
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>

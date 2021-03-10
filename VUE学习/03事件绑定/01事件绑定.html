@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-03-02 22:56:04
- * @LastEditTime: 2021-03-10 21:55:48
+ * @LastEditTime: 2021-03-10 22:24:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinede:\GitHUb\personal_study\VUE学习\01初学VUE\列表渲染.html
@@ -14,34 +14,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <title>计算属性</title>
     <style>
-        #pane {
-            width: 200px;
-            height: 200px;
-            background: skyblue;
-            text-align: center;
-        }
-        #login {
-            background : skyblue;
-        }
-        #register {
-            background: pink;
+        .btn{
+            background-color: skyblue;
+            width: 100px;
+            height: 50px;
+            border: 1px;
+            border-radius: 15px;
         }
     </style>
+    <title>事件绑定</title>
 </head>
 <body>
     <div id = "app">
-        <!-- 一般情况下，计算内容 -->
-        <h1>{{firstName + lastName}}</h1>
-        <!-- 计算属性 -->
-        <h1>{{fullName}}</h1>
-        <!-- 平时逆序显示一个单词 -->
-        <h1>{{word.split("").reverse().join("")}}</h1>
-        <!-- VUE逆序显示一个单词 -->
-        <h1>{{reverseWord}}</h1>
-        <h1>列表计算</h1>
-        <table border="1" style="border:1px solid #000;width:500px;height:400px;">
+        <!-- <h1>点击次数：{{count}}</h1>
+        <button :class = "btn" type="button" @click = "count+=1">点击按钮1</button>
+        <button :class = "btn" type="button" @click = "clickEvent">点击按钮2</button> -->
+
+
+        <!-- 事件传参 -->
+        <!-- <table border="1" style="border:1px solid #000;width:500px;height:400px;">
             <thead>
                 <tr>
                     <th style="width:10%">序号</th>
@@ -51,7 +43,7 @@
                     <th style="width:30%">头像</th>
                 </tr>
             </thead>
-            <tbody v-for = "person,key in oddPerson" align="center">
+            <tbody v-for = "person,key in biographyOfWulin" align="center" @click = "clickEvent(key+1,person)">
                 <tr>
                     <td>
                         <h4>{{key+1}}</h4>
@@ -70,16 +62,22 @@
                     </td>
                 </tr>
             </tbody>
-        </table>
+        </table> -->
+
+        <!-- 事件修饰符 -->
+        <!-- 由于按钮在div里，点击按钮会将事件一层一层的往外传递 -->
+        <div class = "btnParent" @click = "clickParent">
+            <!-- 加了.stop之后就会在点击按钮之后进行阻止，不会触发clickParent事件 -->
+            <button @click.stop = "clickEvent">按钮</button>
+        </div>
     </div>
     <script type="text/javascript">
         var firstVue = new Vue({
             // 元素id、类名
             el : "#app",
             data : {
-                firstName : "苏",
-                lastName : "元元",
-                word : "music",
+                btn : "btn",
+                count : 0,
                 biographyOfWulin : [
                     {name : '佟湘玉',age : 29, gender : '女', image : 'E:/touxiang/t.jpg'},
                     {name : '白展堂',age : 29, gender : '男', image : 'E:/touxiang/b.jpg'},
@@ -92,21 +90,16 @@
                     {name : '燕小六',age : 24, gender : '男', image : 'E:/touxiang/y.jpg'}
                 ]
             },
-            // 计算属性
-            computed : {
-                fullName : function() {
-                    //会将计算结果缓存
-                    return this.firstName + this.lastName;
+            methods : {
+                clickEvent : function(event){
+                    console.log("clickEvent");
+                    // console.log(value);
+                    // this.count++;
                 },
-                reverseWord : function() {
-                    //会将计算结果缓存
-                    return this.word.split("").reverse().join("");
-                },
-                oddPerson : function() {
-                    let result = this.biographyOfWulin.filter((item, i)=>{
-                        return item.age%2 == 0;
-                    })
-                    return result;
+                clickParent : function(event){
+                    console.log("clickParent");
+                    // console.log(value);
+                    // this.count++;
                 }
             }
         });

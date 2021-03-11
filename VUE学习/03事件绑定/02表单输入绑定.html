@@ -1,0 +1,114 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-03-02 22:56:04
+ * @LastEditTime: 2021-03-11 21:47:13
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \undefinede:\GitHUb\personal_study\VUE学习\01初学VUE\列表渲染.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .btn{
+            background-color: skyblue;
+            width: 100px;
+            height: 50px;
+            border: 1px;
+            border-radius: 15px;
+        }
+    </style>
+    <title>表单输入绑定</title>
+</head>
+<body>
+    <div id = "app">
+        <!-- 单行输入框 -->
+        <input type="text" value="" name="username" v-model.lazy = "message">
+        <p>{{message}}</p>
+        <br>
+        <!-- 多行文本输入 -->
+        <textarea name="duohang" cols="30" rows="10" v-model = "message"></textarea>
+        <br>
+        <!-- 复选框 -->
+        <h1>选择喜欢的水果</h1>
+        <span v-for = "item in fruits">
+            {{item}}
+            <input type="checkbox" name="fruit" :value="item" v-model = "checked">
+        </span>
+        <h2>{{checked}}</h2>
+        <br>
+        <!-- 单选框 -->
+        <h1>选择喜欢的水果</h1>
+        <span v-for = "item in fruits">
+            {{item}}
+            <input type="radio" name="onefruit" :value="item" v-model = "radioChecked">
+        </span>
+        <h2>{{radioChecked}}</h2>
+        <br>
+        <!-- 下拉框单选 -->
+        <h1>所在城市</h1>
+        <select v-model = "choseCity" name="" id="">
+            <option v-for = "item in citys" :value="item">{{item}}</option>
+        </select>
+        <h2>{{choseCity}}</h2>
+        <br>
+        <!-- 下拉框多选 -->
+        <h1>所在城市</h1>
+        <select v-model = "likeCitys" name="" id="" multiple = "multiple">
+            <option v-for = "item in citys" :value="item">{{item}}</option>
+        </select>
+        <h2>{{likeCitys}}</h2>
+        <br>
+        <!-- 将 字符串变为数字 -->
+        <input type="text" value="" name="age" v-model.number = "age">
+        <p>{{age}}</p>
+    </div>
+    <script type="text/javascript">
+        var firstVue = new Vue({
+            // 元素id、类名
+            el : "#app",
+            data : {
+                btn : "btn",
+                message : "xiaoming",
+                fruits : [
+                    '苹果',
+                    '香蕉',
+                    '草莓',
+                    '葡萄',
+                    '西瓜',
+                    '橘子'
+                ],
+                checked : [],
+                radioChecked : "",
+                citys : ['北京','上海','广州','深圳','太原','临汾'],
+                choseCity : "",
+                likeCitys : [],
+                age : 16
+            },
+            methods : {
+                clickEvent : function(event){
+                    console.log("clickEvent");
+                    // console.log(value);
+                    // this.count++;
+                },
+                clickParent : function(event){
+                    console.log("clickParent");
+                    // console.log(value);
+                    // this.count++;
+                }
+            },
+            watch : {
+                age : function(val) {
+                    console.log(val);
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>

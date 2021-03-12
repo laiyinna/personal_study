@@ -1,0 +1,123 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-03-02 22:56:04
+ * @LastEditTime: 2021-03-12 22:04:38
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \undefinede:\GitHUb\personal_study\VUE学习\01初学VUE\列表渲染.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .content{
+            background-color: skyblue;
+            width: 200px;
+            height: 200px;
+        }
+        .fade-enter-active,.fade-leave-active{
+            /* 过渡效果 */
+            transition: opacity 5s;
+        }
+        .fade-enter,.fade-leave-to{
+            opacity: 0;
+        }
+        .slide-enter-active,.slide-leave-active{
+            /* 过渡效果 */
+            transition: all 5s;
+        }
+        .slide-enter,.slide-leave-to{
+            transform: translateX(500px);
+            opacity: 0;
+        }
+        .page{
+            width: 100vw;
+            height: 100vh;
+            background: #efefef;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        .rMenu{
+            width: 50vw;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            /* 移动位置 */
+            transform: translateX(50vw);
+            background: skyblue;
+            /* 过渡效果 */
+            /* transition: transform 5s; */
+        }
+        .btn{
+            background-color: skyblue;
+            width: 100px;
+            height: 50px;
+            border: 1px;
+            border-radius: 15px;
+        }
+        .slideRight-enter-active,.slideRight-leave-active{
+            /* 过渡效果 */
+            transition: all 5s;
+        }
+        .slideRight-enter,.slideRight-leave-to{
+            transform: translateX(100vw);
+            opacity: 0;
+        }
+    </style>
+    <title>过渡动画</title>
+</head>
+<body>
+    <div id = "app">
+        <!-- 属性name会跟框架追加的类名一致 -->
+        <!-- <transition name = "slide">
+            <div v-if = "isShow" class="content">
+
+            </div>
+        </transition> -->
+            <div class="page">
+                首页
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <button :class = "btn" @click = "toggleEvent">侧边栏</button>
+            </div>
+        <transition name = "slideRight">
+            <div class="rMenu" v-if = "isShow">
+                侧边栏
+            </div>
+        </transition>
+        <!-- <button @click = "toggleEvent">切换</button> -->
+    </div>
+    <script type="text/javascript">
+        var firstVue = new Vue({
+            // 元素id、类名
+            el : "#app",
+            data : {
+                isShow : false,
+                btn : "btn"
+            },
+            methods : {
+                toggleEvent : function() {
+                    this.isShow = !this.isShow;
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>
